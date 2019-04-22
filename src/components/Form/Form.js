@@ -3,6 +3,7 @@ import { Component } from 'react';
 import Field from './Field';
 import fieldsData from './fieldsData';
 import expected from './expected';
+import bond from './assets/bond_approve.jpg'
 import './Form.css';
 
 class Form extends Component {
@@ -36,7 +37,7 @@ class Form extends Component {
   }
 
   cleanFields = () => {
-    const validation = this.state;
+    const { validation } = this.state;
 
     this.setState({ validation: Object.keys(validation)
       .reduce((obj, key) => { 
@@ -59,7 +60,7 @@ class Form extends Component {
         {
           isValid
           ?
-           <img src='bond_approve.jpg' alt='bond' className='t-bond-image'/>
+           <img src={bond} alt='bond' className='t-bond-image'/>
           :
             <form onSubmit={this.onSubmit} className='form'>
               <h1>Введите свои данные, агент</h1> 
