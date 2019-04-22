@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { getShowInfo } from '../../api';
 import './Show.css';
 
@@ -30,9 +29,9 @@ class Show extends PureComponent {
       <img className='show-image' src={data.image.medium} alt={data.name}/>
       <h2 className='show-label t-show-name'>{data.name}</h2>
       <p className='show-text t-show-genre'>
-        <b>{data.genres.length ? 'Genre: ' : ''}</b>{data.genres.join(',')}
+        <b>{data.genres.length ? 'Genre: ' : ''}</b>{data.genres.join(', ')}
       </p>
-      <div className='show-text t-show-summary' children={ReactHtmlParser(data.summary)}/>
+      <div className='show-text t-show-summary' dangerouslySetInnerHTML={{__html: data.summary}}/>
     </div>
   }
 }
