@@ -20,7 +20,7 @@ class AuthProvider extends Component {
 
   getProviderValue = () => {
     const { isAuthorized, authError } = this.state;
-    return { isAuthorized, authorize: this.authorize, authError };
+    return { isAuthorized, authorize: this.authorize, authError, loginPath: '/login' };
   };
 
   render() {
