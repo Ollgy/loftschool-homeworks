@@ -9,7 +9,6 @@ const localStorageKey = 'todo-app';
 class Todo extends PureComponent {
   constructor(props) {
     super(props);
-    this.inputRef = React.createRef();
     this.state = {
       inputValue: ''
     }
@@ -42,19 +41,18 @@ class Todo extends PureComponent {
   createNewRecord = () => {
     const { inputValue } = this.state;
     const { renderRecord, renderEmptyRecord } = this;
+    const { saveData, savedData } = this.props;
 
     if (inputValue) {
-      const savedData = this.props.savedData(localStorageKey) || [];
+      const data = savedData(localStorageKey) || [];
       const id = this.getId();
 
-      this.props.saveData(localStorageKey, [...savedData, { value: inputValue, id } ]);
+      saveData(localStorageKey, [...data, { value: inputValue, id } ]);
 
       renderRecord(inputValue, id);
     } else {
       renderEmptyRecord();
     }
-
-    this.inputRef.current.value = '';
 
     this.setState({
       inputValue: ''
@@ -67,7 +65,8 @@ class Todo extends PureComponent {
     return <Card title='Список дел'>
       <div className='todo t-todo-list'>
         <div className='todo-item todo-item-new'>
-          <input ref={this.inputRef}
+          <input
+            value={this.state.inputValue}
             className='todo-input t-input' 
             placeholder='Введите задачу' 
             onChange={this.handleChange}

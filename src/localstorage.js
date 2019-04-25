@@ -4,7 +4,9 @@ function load(localStorageKey) {
 
   try {
     data = JSON.parse(stringData);
-  } catch (e) {}
+  } catch (e) {
+    throw new Error('JSON parse error!');
+  }
 
   return data;
 }
