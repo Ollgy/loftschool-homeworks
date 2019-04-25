@@ -17,34 +17,46 @@ import InboxMail from '../InboxMail';
 import OutboxMail from '../OutboxMail';
 import InboxList from '../InboxList';
 import OutboxList from '../OutboxList';
-import  './AppRouter.module.css';
+import  style from './AppRouter.module.css';
 
-const  AppRouter = () => 
-    <div className='wrapper'>
-    <div className='container'>
-      <nav className='nav'>
-        <ul className='navList t-nav-list'>
-          <li className='navElement'>
-            <NavLink exact to='/app' className='link t-link-home' activeClassName='active' children='Home'/>
-          </li>
-          <li className='navElement'>
-            <NavLink exact to='/app/inbox' className='link t-link-inbox' activeClassName='active' children='Inbox'/>
-          </li>
-          <li className='navElement'>
-            <NavLink exact to='/app/outbox' className='link t-link-outbox' activeClassName='active' children='Outbox'/>
-          </li>
-        </ul>
-      </nav>
+const  AppRouter = (props) => {
+    let location;
 
-      <Switch>
-        <Route path='/app' exact component={Home}/>
-        <Route path='/app/inbox' exact component={InboxList}/>
-        <Route path='/app/outbox' exact component={OutboxList}/>
-        <Route path='/app/inbox/:id'  component={InboxMail}/>
-        <Route path='/app/outbox/:id'  component={OutboxMail}/>
-      </Switch>
-  
-    </div>
+    if (props.location.pathname.match(/inbox/g)) {
+      location = 'Inbox';
+    } else if (props.location.pathname.match(/outbox/g)) {
+      location = 'Outbox';
+    } else {
+      location = 'Home';
+    }
+
+    return <div className={style.wrapper}>
+      <div className={style.container}>
+        <nav className={style.nav}>
+          <ul className={`${style.navList} t-nav-list`}>
+            <li className={style.navElement}>
+              <NavLink exact to='/app' className={`${style.link} t-link-home`} activeClassName='active' children='Home'/>
+            </li>
+            <li className={style.navElement}>
+              <NavLink exact to='/app/inbox' className={`${style.link} t-link-inbox`} activeClassName='active' children='Inbox'/>
+            </li>
+            <li className={style.navElement}>
+              <NavLink exact to='/app/outbox' className={`${style.link} t-link-outbox`} activeClassName='active' children='Outbox'/>
+            </li>
+          </ul>
+        </nav>
+        <div className={style.content}>
+          <h3 className={style.title} children={location}/>
+          <Switch>
+            <Route path='/app' exact component={Home}/>
+            <Route path='/app/inbox' exact component={InboxList}/>
+            <Route path='/app/outbox' exact component={OutboxList}/>
+            <Route path='/app/inbox/:id'  component={InboxMail}/>
+            <Route path='/app/outbox/:id'  component={OutboxMail}/>
+          </Switch>
+        </div>
+      </div>
   </div>
+}
 
 export default AppRouter; 

@@ -1,4 +1,4 @@
-.content-container {
+.container {
   display: flex;
   width: 100%;
   height: 100%;
@@ -6,3 +6,9 @@
   justify-content: center;
   text-align: center;
 }
+
+.content {
+  width: 100%;
+  text-align: center;
+}
+

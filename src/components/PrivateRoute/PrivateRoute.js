@@ -13,7 +13,6 @@ class PrivateRoute extends Component {
       isAuthorized,
       loginPath,
       ...rest  } = this.props;
-      console.log(isAuthorized)
 
     return <Route {...rest} 
       render={ routerProps => 

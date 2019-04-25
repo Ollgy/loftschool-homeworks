@@ -9,9 +9,6 @@ import MailList from '../MailList';
 import { withData } from '../../context/Data';
 
 const InboxList = ({ data }) => 
-  <div className='content'>
-    <h3 className='title' children='Inbox'/>
     <MailList data={data.inbox} path='inbox/' dir='inbox'/>
-  </div>
 
 export default withData(InboxList);
