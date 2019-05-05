@@ -28,13 +28,13 @@ class ShowPage extends PureComponent {
               ?
               <div>
                 <p>{data.name}</p>
-                <img src={data.image.medium} alt={data.name} />
+                <img src={data.image ? data.image.medium : null} alt={data.name} />
                 <p dangerouslySetInnerHTML={{__html: data.summary}}></p>
                 <div className={style.cast}>
                   {data._embedded.cast.map(el => el.person).map(person => 
                     <div className='t-person' key={person.id}>
                       <p>{person.name}</p>
-                      <img src={person.image.medium} alt={person.name}/>
+                      <img src={person.image ? person.image.medium : null} alt={person.name}/>
                     </div>
                   )}
                 </div>
