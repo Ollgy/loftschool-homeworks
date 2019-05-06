@@ -5,6 +5,7 @@
 // и экшн showRequest.
 
 // В методе componentDidMount вам нужно будет диспатчить showRequest action
+
 import React, { PureComponent } from 'react';
 import { showRequest } from '../../actions/actions';
 import { connect } from 'react-redux';
