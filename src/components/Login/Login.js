@@ -8,6 +8,8 @@ import Input from '../Input';
 class Login extends PureComponent {
   // на время разработки свой access token можно вставить сюда, чтобы
   // не вводить каждый раз
+  // https://github.com/ on КП at 04-фев-2018 00:34
+
   state = {
     key: ''
   };
@@ -22,11 +24,15 @@ class Login extends PureComponent {
     const { addApiKey } = this.props;
     const { key } = this.state;
 
-    if (event.key === 'Enter') addApiKey(key);
+    if (event.key === 'Enter') {
+      addApiKey(key);
+      console.log(this.props);
+    }
+
   };
 
   componentDidMount() {
-    this.input.current.focus();
+    //this.input.current.focus();
   }
 
   render() {
