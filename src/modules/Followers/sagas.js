@@ -11,7 +11,8 @@ export function* fetchFollowersFlow(action) {
   // Используйте экшены FETCH_SUCCESS / FETCH_FAILURE
 
   try {
-    const response = yield call(getFollowersInfo, 'https://github.com/ on КП at 04-фев-2018 00:34', action.payload);
+    const key = yield select(state => state.auth.apiKey);
+    const response = yield call(getFollowersInfo, key, action.payload);
     yield put(fetchRequestSuccess(response)) 
   } catch (error) {
     yield put(fetchRequestFailure(error));

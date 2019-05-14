@@ -11,7 +11,8 @@ export function* userFlow(action) {
   // Используйте экшены user_SUCCESS / user_FAILURE
 
   try {
-    const response = yield call(getUserInfo, 'https://github.com/ on КП at 04-фев-2018 00:34', action.payload);
+    const key = yield select(state => state.auth.apiKey);
+    const response = yield call(getUserInfo, key, action.payload);
     yield put(userRequestSuccess(response)) 
   } catch (error) {
     yield put(userRequestFailure(error));

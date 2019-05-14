@@ -26,13 +26,12 @@ class Login extends PureComponent {
 
     if (event.key === 'Enter') {
       addApiKey(key);
-      console.log(this.props);
     }
 
   };
 
   componentDidMount() {
-    //this.input.current.focus();
+    this.input.current.focus();
   }
 
   render() {
