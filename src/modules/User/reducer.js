@@ -1,31 +1,31 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { userRequest, userRequestSuccess, userRequestFailure } from './actions';
+import { fetchRequest, fetchSuccess, fetchFailure } from './actions';
 
 // Обратите внимание на тесты reducer.test.js
 // Они помогут вам написать редьюсер
 
 const data = handleActions(
   {
-    [userRequest]: () => {},
-    [userRequestSuccess]: (_state, action) => action.payload,
+    [fetchRequest]: () => {},
+    [fetchSuccess]: (_state, action) => action.payload,
   },
   {},
 );
 
 const isLoading = handleActions(
   {
-    [userRequest]: () => true,
-    [userRequestSuccess]: () => false,
-    [userRequestFailure]: () => false,
+    [fetchRequest]: () => true,
+    [fetchSuccess]: () => false,
+    [fetchFailure]: () => false,
   },
   false,
 );
 
 const error = handleActions(
   {
-    [userRequest]: () => null,
-    [userRequestFailure]: (_state, action) => action.payload,
+    [fetchRequest]: () => null,
+    [fetchFailure]: (_state, action) => action.payload,
   },
   null,
 );

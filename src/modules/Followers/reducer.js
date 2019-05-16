@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { fetchRequest, fetchRequestSuccess, fetchRequestFailure } from './actions';
+import { fetchRequest, fetchSuccess, fetchFailure } from './actions';
 
 // Обратите внимание на тесты reducer.test.js
 // Они помогут вам написать редьюсер
@@ -8,7 +8,7 @@ import { fetchRequest, fetchRequestSuccess, fetchRequestFailure } from './action
 const data = handleActions(
   {
     [fetchRequest]: () => [],
-    [fetchRequestSuccess]: (_state, action) => action.payload,
+    [fetchSuccess]: (_state, action) => action.payload,
   },
   [],
 );
@@ -16,8 +16,8 @@ const data = handleActions(
 const isLoading = handleActions(
   {
     [fetchRequest]: () => true,
-    [fetchRequestSuccess]: () => false,
-    [fetchRequestFailure]: () => false,
+    [fetchSuccess]: () => false,
+    [fetchFailure]: () => false,
   },
   false,
 );
@@ -25,7 +25,7 @@ const isLoading = handleActions(
 const error = handleActions(
   {
     [fetchRequest]: () => null,
-    [fetchRequestFailure]: (_state, action) => action.payload,
+    [fetchFailure]: (_state, action) => action.payload,
   },
   null,
 );

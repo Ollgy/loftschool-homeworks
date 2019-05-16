@@ -1,21 +1,22 @@
 import { takeLatest, select, put, call, fork } from 'redux-saga/effects';
-import { userRequest, userRequestSuccess, userRequestFailure } from './actions';
+import { fetchRequest, fetchSuccess, fetchFailure } from './actions';
 import { getUserInfo } from './api';
+import { getApiKey } from '../Auth';
 
 function* fetchUserWatcher() {
-  yield takeLatest(userRequest, userFlow); // Замените вопросительный знак на подходящий экшен
+  yield takeLatest(fetchRequest, fetchUserFlow); // Замените вопросительный знак на подходящий экшен
 }
 
-export function* userFlow(action) {
+export function* fetchUserFlow(action) {
   // Реализуйте загрузку данных
   // Используйте экшены user_SUCCESS / user_FAILURE
 
   try {
-    const key = yield select(state => state.auth.apiKey);
+    const key = yield select(getApiKey);
     const response = yield call(getUserInfo, key, action.payload);
-    yield put(userRequestSuccess(response)) 
+    yield put(fetchSuccess(response)) 
   } catch (error) {
-    yield put(userRequestFailure(error));
+    yield put(fetchFailure(error));
   }
 }
 

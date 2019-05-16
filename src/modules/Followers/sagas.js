@@ -1,6 +1,7 @@
 import { takeLatest, select, put, call, fork } from 'redux-saga/effects';
-import { fetchRequest, fetchRequestSuccess, fetchRequestFailure } from './actions';
+import { fetchRequest, fetchSuccess, fetchFailure } from './actions';
 import { getFollowersInfo } from './api';
+import { getApiKey } from '../Auth';
 
 function* fetchFollowersWatcher() {
   yield takeLatest(fetchRequest, fetchFollowersFlow); // Замените вопросительный знак на подходящий экшен
@@ -11,11 +12,11 @@ export function* fetchFollowersFlow(action) {
   // Используйте экшены FETCH_SUCCESS / FETCH_FAILURE
 
   try {
-    const key = yield select(state => state.auth.apiKey);
+    const key = yield select(getApiKey);
     const response = yield call(getFollowersInfo, key, action.payload);
-    yield put(fetchRequestSuccess(response)) 
+    yield put(fetchSuccess(response)) 
   } catch (error) {
-    yield put(fetchRequestFailure(error));
+    yield put(fetchFailure(error));
   }
 }
 
